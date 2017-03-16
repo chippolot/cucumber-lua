@@ -62,14 +62,17 @@ function CucumberLua:snippet_text (args)
 end
 
 function CucumberLua:FindArgs(str, pattern)
-  local patternWithPositions = rex.gsub(pattern, "\(", "()(")
-  matches = {rex.find(str, patternWithPositions)}
-  args = {}
-  for i = 3, #matches, 2 do
-    table.insert(args, {
-      ["pos"] = matches[i] - 1,
-      ["val"] = matches[i + 1]
-    })
+  local compiledPattern = rex.new(pattern)
+  local matches = {compiledPattern:exec(str)}
+  local captures = matches[3]
+  local args = {}
+  if captures then
+    for i = 1, #captures, 2 do
+      table.insert(args, {
+        pos = captures[i] - 1,
+        val = string.sub(str, captures[i], captures[i+1])
+      })
+    end
   end
   return args
 end
