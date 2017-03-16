@@ -1,7 +1,7 @@
 package = "Cucumber-Lua"
-version = "0.0-2"
+version = "0.0-3"
 source = {
-  url = "git://github.com/cucumber/cucumber-lua.git"
+  url = "git://github.com/chippolot/cucumber-lua.git"
 }
 description = {
   summary = "A cucumber wire protocol implementation",
@@ -9,14 +9,15 @@ description = {
     A wire protocol implementation for cucumber that
     executes steps defined in Lua
   ]],
-  homepage = "http://github.com/cucumber/cucumber-lua",
+  homepage = "http://github.com/chippolot/cucumber-lua",
   maintainer = "Josh Chisholm, Featurist <josh@featurist.co.uk>",
   license = "MIT"
 }
 dependencies = {
   "lua >= 5.1",
   "luasocket >= 2.0",
-  "luajson >= 1.3"
+  "luajson >= 1.3",
+  "lrexlib-POSIX >= 2.8.0-1"
 }
 build = {
   type = "builtin",

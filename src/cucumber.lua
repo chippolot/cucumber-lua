@@ -1,6 +1,8 @@
 module("cucumber", package.seeall)
 
 require("json")
+local rex = require("rex_posix")
+
 local socket = require("socket")
 
 local CucumberLua = {
@@ -18,7 +20,7 @@ function CucumberLua:step_matches(args)
   local text = args["name_to_match"]
   local matches = {}
   for pattern,func in pairs(self.step_definitions) do
-    if type(func) == "function" and string.match(text, pattern) then
+    if type(func) == "function" and rex.match(text, pattern) then
       table.insert(matches, self:StepMatch(text, pattern))
     end
   end
@@ -60,8 +62,8 @@ function CucumberLua:snippet_text (args)
 end
 
 function CucumberLua:FindArgs(str, pattern)
-  local patternWithPositions = string.gsub(pattern, "%(", "()(")
-  matches = {string.find(str, patternWithPositions)}
+  local patternWithPositions = rex.gsub(pattern, "%(", "()(")
+  matches = {rex.find(str, patternWithPositions)}
   args = {}
   for i = 3, #matches, 2 do
     table.insert(args, {
