@@ -1,7 +1,7 @@
 module("cucumber", package.seeall)
 
 require("json")
-local rex = require("rex_posix")
+local rex = require("rex_pcre")
 
 local socket = require("socket")
 
@@ -62,7 +62,7 @@ function CucumberLua:snippet_text (args)
 end
 
 function CucumberLua:FindArgs(str, pattern)
-  local patternWithPositions = rex.gsub(pattern, "%(", "()(")
+  local patternWithPositions = rex.gsub(pattern, "\(", "()(")
   matches = {rex.find(str, patternWithPositions)}
   args = {}
   for i = 3, #matches, 2 do

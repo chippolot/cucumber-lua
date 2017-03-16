@@ -17,7 +17,7 @@ dependencies = {
   "lua >= 5.1",
   "luasocket >= 2.0",
   "luajson >= 1.3",
-  "lrexlib-POSIX >= 2.8.0-1"
+  "lrexlib-pcre >= 2.8"
 }
 build = {
   type = "builtin",
